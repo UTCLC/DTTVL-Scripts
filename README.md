@@ -27,3 +27,6 @@
 
 ## EnemyNameFileNameDiffCheck.py
 在 IL 中检查有哪些 enemyName 与 fileName 不一致
+
+## ReplaceEnemyName2FileName.py
+在 IL 中把 `battle/enemies/enemyName` 的 enemyName 替换为 fileName
