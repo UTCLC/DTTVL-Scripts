@@ -3,7 +3,7 @@ import re
 pattern = re.compile(r'"battle/enemies/"[^"(){}}]*?dup[^"(){}}]*?string EnemyBase::enemyName')
 pattern1 = re.compile(r'"battle/enemies/"[^"(){}}]*?ldfld      string EnemyBase::enemyName')
 
-with (open(input("File path: "), "r", encoding="utf-8-sig") as f):
+with (open(input("File path: "), "r+", encoding="utf-8-sig") as f):
 	content = f.read()
 	find = pattern.findall(content)
 	print(find)
