@@ -79,7 +79,7 @@ def write(dir):
 				cont = json.loads(f.read())
 			except:
 				print("Error encountered when loading "+path)
-			if ("left" in file):
+			if (":left" in file):
 				if ("left" in cont.keys()):
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
@@ -87,7 +87,7 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No left was found in {path}")
-			if ("right" in file):
+			if (":right" in file):
 				if ("right" in cont.keys()):
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
@@ -95,7 +95,7 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No right was found in {path}")
-			if ("up" in file):
+			if (":up" in file):
 				if ("up" in cont.keys()):
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
@@ -103,7 +103,7 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No up was found in {path}")
-			if ("down" in file):
+			if (":down" in file):
 				if ("down" in cont.keys()):
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
@@ -111,7 +111,7 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No down was found in {path}")
-			if ("m_Text" in file):
+			if (":m_Text" in file):
 				if ("m_Text" in cont.keys()):
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
@@ -119,7 +119,7 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No m_Text was found in {path}")
-			if ("lines2" in file):
+			if (":lines2:" in file):
 				if ("lines2" in cont.keys()):
 					if (os.path.exists(dir+"Repacked/"+path)):
 						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
@@ -130,7 +130,7 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No lines2 was found in {path}")
-			elif ("lines" in file):
+			elif (":lines:" in file):
 				if ("lines" in cont.keys()):
 					if (os.path.exists(dir+"Repacked/"+path)):
 						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
