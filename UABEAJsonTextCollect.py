@@ -81,6 +81,9 @@ def write(dir):
 				print("Error encountered when loading "+path)
 			if (":left" in file):
 				if ("left" in cont.keys()):
+					if (os.path.exists(dir+"Repacked/"+path)):
+						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
+							cont = json.loads(f.read())
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
 						cont["left"] = strings[file]
@@ -89,6 +92,9 @@ def write(dir):
 					print(f"No left was found in {path}")
 			if (":right" in file):
 				if ("right" in cont.keys()):
+					if (os.path.exists(dir+"Repacked/"+path)):
+						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
+							cont = json.loads(f.read())
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
 						cont["right"] = strings[file]
@@ -97,6 +103,9 @@ def write(dir):
 					print(f"No right was found in {path}")
 			if (":up" in file):
 				if ("up" in cont.keys()):
+					if (os.path.exists(dir+"Repacked/"+path)):
+						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
+							cont = json.loads(f.read())
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
 						cont["up"] = strings[file]
@@ -105,6 +114,9 @@ def write(dir):
 					print(f"No up was found in {path}")
 			if (":down" in file):
 				if ("down" in cont.keys()):
+					if (os.path.exists(dir+"Repacked/"+path)):
+						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
+							cont = json.loads(f.read())
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
 						cont["down"] = strings[file]
@@ -113,6 +125,9 @@ def write(dir):
 					print(f"No down was found in {path}")
 			if (":m_Text" in file):
 				if ("m_Text" in cont.keys()):
+					if (os.path.exists(dir+"Repacked/"+path)):
+						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
+							cont = json.loads(f.read())
 					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
 					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
 						cont["m_Text"] = strings[file]
