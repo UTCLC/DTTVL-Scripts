@@ -128,7 +128,7 @@ def write(dir):
 					print(f"No phrases was found in {path}")
 			if ("text" in file.lower()):
 				for keyy in cont.keys():
-					if (("text" in keyy.lower()) and (type(cont[keyy]) == str)):
+					if ((file.split(":")[1] == keyy) and (type(cont[keyy]) == str)):
 						if (os.path.exists(dir+"Repacked/"+path)):
 							with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
 								cont = json.loads(f.read())
@@ -140,7 +140,7 @@ def write(dir):
 						print(f"No *text* was found in {path}")
 			if ("lines" in file.lower()):
 				for keyy in cont.keys():
-					if (("lines" in keyy.lower()) and (type(cont[keyy]) == dict) and ("Array" in cont[keyy].keys())):
+					if ((file.split(":")[1] == keyy) and (type(cont[keyy]) == dict) and ("Array" in cont[keyy].keys())):
 						if (os.path.exists(dir+"Repacked/"+path)):
 							with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
 								cont = json.loads(f.read())
