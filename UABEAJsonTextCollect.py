@@ -28,10 +28,6 @@ def find(dir):
 					string = contents["down"]
 					print(f"Found {string} in {path}")
 					strings[path.replace(directory,"").lstrip("\\")+":down"] = string
-				if ("m_Text" in contents.keys()):
-					string = contents["m_Text"]
-					print(f"Found {string} in {path}")
-					strings[path.replace(directory,"").lstrip("\\")+":m_Text"] = string
 				if ("phrases" in contents.keys()):
 					stringss = contents["phrases"]["Array"]
 					print(f"Found {stringss} in {path}")
@@ -40,6 +36,10 @@ def find(dir):
 						strings[path.replace(directory,"").lstrip("\\")+":phrases:"+str(i)] = string
 						i += 1
 				for keyy in contents.keys():
+					if (("text" in keyy.lower()) and (type(contents[keyy]) == str)):
+						string = contents[keyy]
+						print(f"Found {string} in {path}")
+						strings[path.replace(directory,"").lstrip("\\")+":"+keyy] = string
 					if (("lines" in keyy.lower()) and (type(contents[keyy]) == dict) and ("Array" in contents[keyy].keys())):
 						stringss = contents[keyy]["Array"]
 						print(f"Found {stringss} in {path}")
@@ -47,8 +47,6 @@ def find(dir):
 						for string in stringss:
 							strings[path.replace(directory,"").lstrip("\\")+":"+keyy+":"+str(i)] = string
 							i += 1
-				else:
-					print(f"No left/right/up/down/m_Text/phrases/*lines* was found in {path}")
 		elif (os.path.isdir(path) and not (path.rstrip("/").rstrip("\\").endswith("Repacked"))):
 			find(path)
 
@@ -117,17 +115,6 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No down was found in {path}")
-			if (":m_Text" in file):
-				if ("m_Text" in cont.keys()):
-					if (os.path.exists(dir+"Repacked/"+path)):
-						with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
-							cont = json.loads(f.read())
-					os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
-					with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
-						cont["m_Text"] = strings[file]
-						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
-				else:
-					print(f"No m_Text was found in {path}")
 			if ("phrases" in file):
 				if ("phrases" in cont.keys()):
 					if (os.path.exists(dir+"Repacked/"+path)):
@@ -139,6 +126,18 @@ def write(dir):
 						f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
 				else:
 					print(f"No phrases was found in {path}")
+			if ("text" in file.lower()):
+				for keyy in cont.keys():
+					if (("text" in keyy.lower()) and (type(cont[keyy]) == str)):
+						if (os.path.exists(dir+"Repacked/"+path)):
+							with (open(dir+"Repacked/"+path, mode="r", encoding="utf-8") as f):
+								cont = json.loads(f.read())
+						os.makedirs(os.path.dirname(dir+"Repacked/"+path),exist_ok=True)
+						with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
+							cont[keyy] = strings[file]
+							f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
+					else:
+						print(f"No *text* was found in {path}")
 			if ("lines" in file.lower()):
 				for keyy in cont.keys():
 					if (("lines" in keyy.lower()) and (type(cont[keyy]) == dict) and ("Array" in cont[keyy].keys())):
@@ -149,10 +148,8 @@ def write(dir):
 						with (open(dir+"Repacked/"+path, mode="w", encoding="utf-8") as f):
 							cont[keyy]["Array"][int(file.split(":")[-1])] = strings[file]
 							f.write(json.dumps(cont, indent=2, separators=(',', ': '), ensure_ascii=False))
-				else:
-					print(f"No *lines* was found in {path}")
-			else:
-				print(f"No left/right/up/down/m_Text/phrases/*lines* was found in {path}")
+					else:
+						print(f"No *lines* was found in {path}")
 
 strings = {}
 directory = input("Directory: ").replace("\\","/")
